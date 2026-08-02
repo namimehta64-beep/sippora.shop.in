@@ -1132,8 +1132,8 @@ function renderDrawer(){
   if(discount > 0){
     rowsHtml += `<div class="summary-row discount"><span>Combo savings</span><span>−₹${discount}</span></div>`;
   }
-  rowsHtml += `<div class="summary-row"><span>Shipping</span><span>Calculated at checkout</span></div>`;
-  rowsHtml += `<div class="summary-row total"><span>Total</span><span>₹${subtotal}+</span></div>`;
+  rowsHtml += `<div class="summary-row"><span>Shipping</span><span>Free</span></div>`;
+  rowsHtml += `<div class="summary-row total"><span>Total</span><span>₹${subtotal}</span></div>`;
   rows.innerHTML = rowsHtml;
 }
 
@@ -1161,7 +1161,7 @@ function showToast(msg){
 /* ---------- Checkout flow ---------- */
 let currentStep = 1;
 const TOTAL_STEPS = 4;
-let shippingFee = null;
+let shippingFee = 0;
 let selectedPincodeValid = false;
 
 function openCheckout(){
@@ -1207,7 +1207,6 @@ function validateField(id, condition){
 }
 
 function shippingForPincode(pin){
-    if(!/^400\d{3}$/.test(pin)) return null;
     return 0;
  }
 
@@ -1296,7 +1295,7 @@ function buildReview(){
   } else {
     document.getElementById('revDiscountRow').style.display = 'none';
   }
-  const fee = shippingFee ?? 0;
+  const fee = 0;
   document.getElementById('revShipping').textContent = fee === 0 ? 'Free' : '₹' + fee;
   document.getElementById('revTotal').textContent = '₹' + (subtotal + fee);
 }
@@ -1311,7 +1310,7 @@ function placeOrder(){
   ['cloud','mysa'].forEach(id=>{
     if(cart[id] > 0) itemsSummary.push(`${PRODUCTS[id].name} x${cart[id]}`);
   });
-  const fee = shippingFee ?? 0;
+  const fee = 0;
   const payVal = document.querySelector('input[name="pay"]:checked').value;
   const payLabels = { cod:'Cash on Delivery', upi:'UPI', card:'Credit / Debit Card' };
 
