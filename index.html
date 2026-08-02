@@ -1207,13 +1207,9 @@ function validateField(id, condition){
 }
 
 function shippingForPincode(pin){
-  if(!/^400\d{3}$/.test(pin)) return null;
-  const n = parseInt(pin,10);
-  if(n <= 400039) return 40;
-  if(n <= 400069) return 60;
-  if(n <= 400104) return 65;
-  return null;
-}
+    if(!/^400\d{3}$/.test(pin)) return null;
+    return 0;
+ }
 
 document.getElementById('pincode').addEventListener('input', ()=>{
   const pin = document.getElementById('pincode').value.trim();
